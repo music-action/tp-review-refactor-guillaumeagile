@@ -1,4 +1,4 @@
-import { Game } from './kata';
+import { Game, Board } from './kata';
 
 describe('TicTacToe game', () => {
   let game: Game;
@@ -108,5 +108,31 @@ describe('TicTacToe game', () => {
     const winner = game.Winner();
 
     expect(winner).toBe('O');
+  });
+});
+
+describe('Board', () => {
+  it('constructor should create a 3x3 board', () => {
+    const board = new Board();
+    
+    // Verify all 9 tiles exist with correct coordinates
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        const tile = board.TileAt(i, j);
+        expect(tile).toBeDefined();
+        expect(tile.X).toBe(i);
+        expect(tile.Y).toBe(j);
+        //expect(tile.Symbol).toBe(' ');
+      }
+    }
+  });
+
+  it('constructor should not create a board larger than 3x3', () => {
+    const board = new Board();
+    
+    // Verify that positions outside 3x3 do not exist
+    expect(board.TileAt(3, 0)).toBeUndefined();
+    expect(board.TileAt(0, 3)).toBeUndefined();
+    expect(board.TileAt(3, 3)).toBeUndefined();
   });
 });

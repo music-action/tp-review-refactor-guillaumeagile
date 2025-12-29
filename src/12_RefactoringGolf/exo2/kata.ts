@@ -109,7 +109,7 @@ interface Tile {
   Symbol: string;
 }
 
-class Board {
+export class Board {
   private _plays: Tile[] = [];
 
   constructor() {
